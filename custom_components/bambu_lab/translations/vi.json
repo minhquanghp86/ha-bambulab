@@ -234,13 +234,13 @@
         "name": "Mã hóa MQTT"
       },
       "hybrid_mode_blocks_control": {
-        "name": "Chế độ lai MQTT bị chặn điều khiển"
+        "name": "Chế độ Hybrid MQTT bị chặn điều khiển"
       },
       "firmware_update": {
         "name": "Firmware"
       },
       "extruder_filament_state": {
-        "name": "Sợi nhựa đùn"
+        "name": "Trạng thái sợi nhựa"
       }
     },
     "button": {
@@ -254,7 +254,7 @@
         "name": "Dừng"
       },
       "refresh": {
-        "name": "Làm mới bắt buộc"
+        "name": "Làm mới"
       },
       "dev": {
         "name": "Gỡ lỗi"
@@ -288,10 +288,10 @@
         "name": "Camera"
       },
       "cover_image": {
-        "name": "Ảnh bìa"
+        "name": "Ảnh mẫu in 3D"
       },
       "pick_image": {
-        "name": "Ảnh chọn"
+        "name": "Ảnh Footprint bản in"
       }
     },
     "light": {
@@ -307,13 +307,13 @@
     },
     "number": {
       "target_bed_temperature": {
-        "name": "Nhiệt độ mục tiêu bàn in"
+        "name": "Nhiệt độ cài đặt bàn in"
       },
       "target_nozzle_temperature": {
-        "name": "Nhiệt độ mục tiêu đầu phun"
+        "name": "Nhiệt độ cài đặt đầu phun"
       },
       "target_chamber_temperature": {
-        "name": "Nhiệt độ mục tiêu buồng máy"
+        "name": "Nhiệt độ cài đặt buồng máy"
       }
     },
     "select": {
@@ -359,16 +359,16 @@
         "name": "Nhiệt độ bàn in"
       },
       "target_bed_temp": {
-        "name": "Nhiệt độ mục tiêu bàn in"
+        "name": "Nhiệt độ cài đặt bàn in"
       },
       "chamber_temp": {
         "name": "Nhiệt độ buồng máy"
       },
       "target_chamber_temp": {
-        "name": "Nhiệt độ mục tiêu buồng máy"
+        "name": "Nhiệt độ cài đặt buồng máy"
       },
       "target_nozzle_temp": {
-        "name": "Nhiệt độ mục tiêu đầu phun"
+        "name": "Nhiệt độ cài đặt đầu phun"
       },
       "nozzle_temp": {
         "name": "Nhiệt độ đầu phun"
@@ -377,13 +377,13 @@
         "name": "Nhiệt độ đầu phun trái"
       },
       "left_target_nozzle_temp": {
-        "name": "Nhiệt độ mục tiêu đầu phun trái"
+        "name": "Nhiệt độ cài đặt đầu phun trái"
       },
       "right_nozzle_temp": {
         "name": "Nhiệt độ đầu phun phải"
       },
       "right_target_nozzle_temp": {
-        "name": "Nhiệt độ mục tiêu đầu phun phải"
+        "name": "Nhiệt độ cài đặt đầu phun phải"
       },
       "aux_fan_speed": {
         "name": "Tốc độ quạt phụ"
@@ -401,7 +401,7 @@
         "name": "Tải xuống model"
       },
       "speed_profile": {
-        "name": "Hồ sơ tốc độ",
+        "name": "Tốc độ in",
         "state": {
           "silent": "Im lặng",
           "standard": "Tiêu chuẩn",
@@ -418,7 +418,7 @@
         "name": "Tên máy in"
       },
       "stage": {
-        "name": "Giai đoạn hiện tại",
+        "name": "Trạng thái in hiện tại",
         "state": {
           "offline": "Ngoại tuyến",
           "printing": "Đang in",
@@ -539,7 +539,7 @@
       "print_bed_type": {
         "name": "Loại bàn in",
         "state": {
-          "textured_plate": "Bàn có vân",
+          "textured_plate": "Bàn PEI nhám",
           "cool_plate": "Cool Plate / Bàn PLA",
           "hot_plate": "Bàn PEI mịn / Bàn nhiệt độ cao",
           "eng_plate": "Bàn kỹ thuật",
@@ -547,16 +547,16 @@
         }
       },
       "print_length": {
-        "name": "Chiều dài in"
+        "name": "Chiều dài nhựa in"
       },
       "print_weight": {
-        "name": "Khối lượng in"
+        "name": "Khối lượng nhựa in"
       },
       "subtask_name": {
         "name": "Tên tác vụ"
       },
       "print_type": {
-        "name": "Loại in",
+        "name": "Kiểu in",
         "state": {
           "local": "Cục bộ",
           "cloud": "Cloud",
@@ -574,7 +574,7 @@
         "name": "Thời gian kết thúc"
       },
       "total_usage_hours": {
-        "name": "Tổng giờ sử dụng"
+        "name": "Tổng thời gian sử dụng"
       },
       "current_layer": {
         "name": "Lớp hiện tại"
@@ -641,7 +641,7 @@
         "name": "Chỉ số độ ẩm"
       },
       "external_spool": {
-        "name": "Cuộn ngoài",
+        "name": "Cuộn nhựa ngoài",
         "state_attributes": {
           "active": { "name": "Đang hoạt động" },
           "bed_temp": { "name": "Nhiệt độ bàn in" },
@@ -783,9 +783,9 @@
       "hotend_rack_hotend": {
         "name": "Đầu phun {hotend_id}",
         "state": {
-          "mounted": "Đã lắp",
-          "docked": "Đang đỗ",
-          "empty": "Rỗng"
+          "mounted": "Đang in",
+          "docked": "Trên giá chờ",
+          "empty": "Khe trống"
         },
         "state_attributes": {
           "slot": { "name": "Khe cắm" },
@@ -870,7 +870,7 @@
       "description": "{device} đang kết nối cloud với mã hóa MQTT được bật. Chỉ có thể điều khiển đèn qua tích hợp này. Tất cả các điều khiển khác không khả dụng. Máy in phải được đặt sang chế độ LAN dành cho nhà phát triển để cho phép điều khiển từ Home Assistant."
     },
     "hybrid_mode_blocking": {
-      "title": "Kết nối lai chặn điều khiển",
+      "title": "Kết nối hybrid chặn điều khiển",
       "description": "{device} đang kết nối cloud nhưng tích hợp dùng kết nối mqtt cục bộ. Điều này chặn việc đặt nhiệt độ và in lại từ lịch sử. Chuyển kết nối sang cloud thuần túy để bật điều khiển đầy đủ."
     }
   }
