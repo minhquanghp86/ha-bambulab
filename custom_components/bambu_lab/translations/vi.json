@@ -1,1 +1,877 @@
-{}
+{
+  "device_automation": {
+    "trigger_type": {
+      "event_print_canceled": "Lệnh in đã bị hủy",
+      "event_print_failed": "Lệnh in thất bại",
+      "event_print_finished": "Lệnh in hoàn tất",
+      "event_print_started": "Bắt đầu in",
+      "event_print_error": "Lỗi in",
+      "event_print_error_cleared": "Đã xóa lỗi in",
+      "event_printer_error": "Lỗi HMS",
+      "event_printer_error_cleared": "Đã xóa lỗi HMS"
+    }
+  },
+  "config": {
+    "abort": {
+      "already_configured": "Thiết bị đã được cấu hình",
+      "no_printers": "Không tìm thấy máy in chưa được cấu hình trong tài khoản.",
+      "cloudflare": "Cloudflare đã chặn kết nối.",
+      "curl_unavailable": "Thư viện curl_cffi không khả dụng."
+    },
+    "error": {
+      "cannot_connect": "Kết nối thất bại. Kiểm tra thông tin xác thực.",
+      "cannot_connect_cloud_timeout": "Hết thời gian kết nối đến Bambu Lab cloud.",
+      "cannot_connect_cloud_access_denied": "Bị từ chối truy cập bởi Bambu Lab cloud.",
+      "cannot_connect_cloud_connection_refused": "Bambu Lab cloud từ chối kết nối.",
+      "cannot_connect_cloud_address_unreachable": "Không thể truy cập địa chỉ Bambu Lab cloud.",
+      "cannot_connect_cloud_unknown": "Lỗi không xác định khi kết nối đến Bambu Lab cloud.",
+      "cannot_connect_local_timeout": "Kết nối thất bại. Hết thời gian chờ.",
+      "cannot_connect_local_access_denied": "Kết nối thất bại. Truy cập bị từ chối - kiểm tra mã truy cập.",
+      "cannot_connect_local_incorrect_serial": "Kết nối thất bại. Kết nối bị đóng bởi máy in - kiểm tra số serial.",
+      "cannot_connect_local_incorrect_address": "Kết nối thất bại. Kết nối bị từ chối - kiểm tra địa chỉ IP.",
+      "cannot_connect_local_address_unreachable": "Kết nối thất bại. Không thể truy cập địa chỉ - kiểm tra kết nối mạng.",
+      "cannot_connect_local_unknown": "Kết nối thất bại. Kiểm tra lại các thông tin đã nhập.",
+      "invalid_auth": "Xác thực không hợp lệ.",
+      "unknown": "Lỗi không xác định.",
+      "code_needed": "Phải cung cấp mã xác minh.",
+      "verifyCode": "Yêu cầu mã xác minh. Kiểm tra email hoặc điện thoại của bạn.",
+      "code_expired": "Mã xác minh đã hết hạn. Mã mới đã được yêu cầu. Kiểm tra email hoặc điện thoại của bạn.",
+      "code_incorrect": "Mã xác minh không đúng. Vui lòng nhập lại.",
+      "tfaCode": "Yêu cầu mã xác thực 2 yếu tố. Vui lòng nhập ngay."
+    },
+    "step": {
+      "user": {
+        "description": "Cấu hình qua Bambu Lab cloud là đơn giản và nhanh nhất. Tài khoản mạng xã hội không có mật khẩu không được hỗ trợ.\n\rBạn cũng có thể tái sử dụng thông tin xác thực đang hoạt động từ các máy in khác. Nếu tìm thấy, chúng sẽ được liệt kê theo địa chỉ email.\n\rHoặc bạn có thể kết nối bằng cách cung cấp thủ công thông tin kết nối cục bộ của máy in. Điều này bắt buộc đối với máy in ở chế độ Lan.",
+        "data": {
+          "printer_mode": "Chế độ cấu hình máy in:"
+        }
+      },
+      "Bambu": {
+        "title": "Kết nối Bambu Lab Cloud",
+        "description": "Vui lòng cung cấp thông tin đăng nhập Bambu Lab của bạn:",
+        "data": {
+          "region": "Khu vực tài khoản:",
+          "email": "Địa chỉ Email hoặc Số điện thoại",
+          "password": "Mật khẩu",
+          "newCode": "Yêu cầu mã mới",
+          "verifyCode": "Mã xác minh qua email hoặc điện thoại",
+          "tfaCode": "Mã xác thực hai yếu tố"
+        }
+      },
+      "Bambu_Choose_Device": {
+        "title": "Chọn máy in",
+        "data": {
+          "serial": "Chọn máy in để thêm:"
+        }
+      },
+      "Bambu_Lan": {
+        "title": "Thiết lập kết nối cục bộ",
+        "description": "Bạn có thể chọn kết nối trực tiếp đến mqtt của máy in thay vì Bambu Lab cloud. Điều này giúp duy trì hoạt động khi Bambu Lab cloud gặp sự cố, nhưng Bambu Lab đã hạn chế điều khiển máy in ở chế độ lai này nên một số tính năng sẽ không khả dụng.\n\rDù chọn cách nào, tích hợp sẽ lấy địa chỉ IP của máy in từ Bambu Lab cloud và xác nhận kết nối được, vì điều này là cần thiết để hỗ trợ camera, lịch sử in và timelapse. Nếu máy in của bạn không thể truy cập từ Home Assistant, bạn có thể tắt kiểm tra này nhưng sẽ mất các tính năng đó.",
+        "data": {
+          "local_mqtt": "Kết nối trực tiếp đến mqtt của máy in:",
+          "skip_local_mqtt": "Bỏ qua kiểm tra kết nối mqtt cục bộ (không khuyến nghị):",
+          "host": "Địa chỉ IP máy in cục bộ:",
+          "access_code": "Mã truy cập:",
+          "print_cache_count": "Số lượng model lưu cache vào home assistant (-1 để không giới hạn):",
+          "timelapse_cache_count": "Số lượng video timelapse lưu cache vào home assistant (-1 để không giới hạn):",
+          "usage_hours": "Số giờ sử dụng hiện tại (tùy chọn):"
+        },
+        "sections": {
+          "advanced": {
+            "name": "Tùy chọn nâng cao",
+            "description": "Các tùy chọn này chỉ cần thiết nếu bạn có cấu hình không tiêu chuẩn.",
+            "data": {
+              "disable_ssl_verify": "Tắt xác minh SSL",
+              "enable_firmware_update": "Bật hỗ trợ cập nhật firmware"
+            }
+          }
+        }
+      },
+      "Lan": {
+        "title": "Kết nối chế độ Lan",
+        "description": "Vui lòng cung cấp địa chỉ IP cục bộ, số serial và mã truy cập của máy in. Mã truy cập có thể tìm thấy trên màn hình máy in, trong cài đặt mạng (WLAN). Số serial (SN) có thể tìm thấy trong cài đặt thiết bị.",
+        "data": {
+          "serial": "Số Serial:",
+          "host": "Địa chỉ IP máy in cục bộ:",
+          "access_code": "Mã truy cập:",
+          "print_cache_count": "Số lượng model lưu cache vào home assistant (-1 để không giới hạn):",
+          "timelapse_cache_count": "Số lượng video timelapse lưu cache vào home assistant (-1 để không giới hạn):",
+          "usage_hours": "Số giờ sử dụng hiện tại (tùy chọn):"
+        },
+        "sections": {
+          "advanced": {
+            "name": "Tùy chọn nâng cao",
+            "description": "Các tùy chọn này chỉ cần thiết nếu bạn có cấu hình không tiêu chuẩn.",
+            "data": {
+              "disable_ssl_verify": "Tắt xác minh SSL",
+              "enable_firmware_update": "Bật hỗ trợ cập nhật firmware"
+            }
+          }
+        }
+      }
+    }
+  },
+  "options": {
+    "abort": {
+      "cloudflare": "Cloudflare đã chặn kết nối.",
+      "curl_unavailable": "Thư viện curl_cffi không khả dụng."
+    },
+    "error": {
+      "cannot_connect": "Kết nối thất bại",
+      "cannot_connect_cloud_timeout": "Hết thời gian kết nối đến Bambu Lab cloud.",
+      "cannot_connect_cloud_access_denied": "Bị từ chối truy cập bởi Bambu Lab cloud.",
+      "cannot_connect_cloud_connection_refused": "Bambu Lab cloud từ chối kết nối.",
+      "cannot_connect_cloud_address_unreachable": "Không thể truy cập địa chỉ Bambu Lab cloud.",
+      "cannot_connect_cloud_unknown": "Lỗi không xác định khi kết nối đến Bambu Lab cloud.",
+      "cannot_connect_local_timeout": "Kết nối thất bại. Hết thời gian chờ.",
+      "cannot_connect_local_access_denied": "Kết nối thất bại. Truy cập bị từ chối - kiểm tra mã truy cập.",
+      "cannot_connect_local_incorrect_serial": "Kết nối thất bại. Kết nối bị đóng bởi máy in - kiểm tra số serial.",
+      "cannot_connect_local_incorrect_address": "Kết nối thất bại. Kết nối bị từ chối - kiểm tra địa chỉ IP.",
+      "cannot_connect_local_address_unreachable": "Kết nối thất bại. Không thể truy cập địa chỉ - kiểm tra kết nối mạng.",
+      "cannot_connect_local_unknown": "Kết nối thất bại. Kiểm tra lại các thông tin đã nhập.",
+      "invalid_auth": "Xác thực không hợp lệ.",
+      "unknown": "Lỗi không xác định.",
+      "code_needed": "Phải cung cấp mã xác minh.",
+      "verifyCode": "Yêu cầu mã xác minh. Kiểm tra email hoặc điện thoại của bạn.",
+      "code_expired": "Mã xác minh đã hết hạn. Mã mới đã được yêu cầu. Kiểm tra email hoặc điện thoại của bạn.",
+      "code_incorrect": "Mã xác minh không đúng. Vui lòng nhập lại.",
+      "tfaCode": "Yêu cầu mã xác thực 2 yếu tố. Vui lòng nhập ngay."
+    },
+    "step": {
+      "init": {
+        "title": "Điều chỉnh cài đặt kết nối",
+        "description": "Cấu hình qua Bambu Lab cloud là đơn giản và nhanh nhất. Tài khoản mạng xã hội không có mật khẩu không được hỗ trợ.\n\rBạn cũng có thể tái sử dụng thông tin xác thực đang hoạt động từ các máy in khác. Nếu tìm thấy, chúng sẽ được liệt kê theo địa chỉ email.\n\rHoặc bạn có thể kết nối bằng cách cung cấp thủ công thông tin kết nối cục bộ của máy in. Điều này bắt buộc đối với máy in ở chế độ Lan.",
+        "data": {
+          "printer_mode": "Chế độ cấu hình máy in:"
+        }
+      },
+      "Bambu": {
+        "title": "Kết nối Bambu Lab Cloud",
+        "description": "Vui lòng cung cấp thông tin đăng nhập Bambu Lab của bạn:",
+        "data": {
+          "region": "Khu vực tài khoản:",
+          "email": "Địa chỉ Email hoặc Số điện thoại",
+          "password": "Mật khẩu",
+          "newCode": "Yêu cầu mã mới",
+          "verifyCode": "Mã xác minh qua email hoặc điện thoại",
+          "tfaCode": "Mã xác thực hai yếu tố"
+        }
+      },
+      "Bambu_Lan": {
+        "title": "Điều chỉnh cấu hình máy in",
+        "description": "Bạn có thể chọn kết nối trực tiếp đến mqtt của máy in thay vì Bambu Lab cloud. Điều này giúp duy trì hoạt động khi Bambu Lab cloud gặp sự cố, nhưng Bambu Lab đã hạn chế điều khiển máy in ở chế độ lai này nên một số tính năng sẽ không khả dụng.\n\rDù chọn cách nào, tích hợp sẽ lấy địa chỉ IP của máy in từ Bambu Lab cloud và xác nhận kết nối được, vì điều này là cần thiết để hỗ trợ camera, lịch sử in và timelapse. Nếu máy in của bạn không thể truy cập từ Home Assistant, bạn có thể tắt kiểm tra này nhưng sẽ mất các tính năng đó.",
+        "data": {
+          "serial": "Điều chỉnh cài đặt cho:",
+          "host": "Địa chỉ IP máy in cục bộ:",
+          "access_code": "Mã truy cập:",
+          "local_mqtt": "Kết nối trực tiếp đến mqtt của máy in:",
+          "skip_local_mqtt": "Bỏ qua kiểm tra kết nối mqtt cục bộ (không khuyến nghị):",
+          "print_cache_count": "Số lượng model lưu cache vào home assistant (-1 để không giới hạn):",
+          "timelapse_cache_count": "Số lượng video timelapse lưu cache vào home assistant (-1 để không giới hạn):",
+          "usage_hours": "Số giờ sử dụng hiện tại (tùy chọn):"
+        },
+        "sections": {
+          "advanced": {
+            "name": "Tùy chọn nâng cao",
+            "description": "Các tùy chọn nâng cao này là tính năng thử nghiệm hoặc tiềm ẩn rủi ro. Hãy đọc tài liệu và sử dụng theo trách nhiệm của bạn.",
+            "data": {
+              "disable_ssl_verify": "Tắt xác minh SSL",
+              "enable_firmware_update": "Bật hỗ trợ cập nhật firmware"
+            }
+          }
+        }
+      },
+      "Lan": {
+        "title": "Kết nối chế độ Lan",
+        "description": "Vui lòng cung cấp địa chỉ IP cục bộ và mã truy cập của máy in. Mã truy cập có thể tìm thấy trên màn hình máy in trong cài đặt mạng (WLAN).",
+        "data": {
+          "host": "Địa chỉ IP máy in cục bộ:",
+          "access_code": "Mã truy cập:",
+          "print_cache_count": "Số lượng model lưu cache vào home assistant (-1 để không giới hạn):",
+          "timelapse_cache_count": "Số lượng video timelapse lưu cache vào home assistant (-1 để không giới hạn):",
+          "usage_hours": "Số giờ sử dụng hiện tại (tùy chọn):"
+        },
+        "sections": {
+          "advanced": {
+            "name": "Tùy chọn nâng cao",
+            "description": "Các tùy chọn nâng cao này là tính năng thử nghiệm hoặc tiềm ẩn rủi ro. Hãy đọc tài liệu và sử dụng theo trách nhiệm của bạn.",
+            "data": {
+              "disable_ssl_verify": "Tắt xác minh SSL",
+              "enable_firmware_update": "Bật hỗ trợ cập nhật firmware"
+            }
+          }
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "active_ams": {
+        "name": "Đang hoạt động"
+      },
+      "drying": {
+        "name": "Đang sấy"
+      },
+      "developer_lan_mode": {
+        "name": "Chế độ LAN dành cho nhà phát triển"
+      },
+      "door_open": {
+        "name": "Cửa"
+      },
+      "timelapse": {
+        "name": "Timelapse"
+      },
+      "hms_errors": {
+        "name": "Lỗi HMS"
+      },
+      "print_error": {
+        "name": "Lỗi in"
+      },
+      "online": {
+        "name": "Trực tuyến"
+      },
+      "mqtt_encryption": {
+        "name": "Mã hóa MQTT"
+      },
+      "hybrid_mode_blocks_control": {
+        "name": "Chế độ lai MQTT bị chặn điều khiển"
+      },
+      "firmware_update": {
+        "name": "Firmware"
+      },
+      "extruder_filament_state": {
+        "name": "Sợi nhựa đùn"
+      }
+    },
+    "button": {
+      "pause": {
+        "name": "Tạm dừng"
+      },
+      "resume": {
+        "name": "Tiếp tục"
+      },
+      "stop": {
+        "name": "Dừng"
+      },
+      "refresh": {
+        "name": "Làm mới bắt buộc"
+      },
+      "dev": {
+        "name": "Gỡ lỗi"
+      },
+      "buzzer_silence": {
+        "name": "Còi - Im lặng"
+      },
+      "buzzer_fire_alarm": {
+        "name": "Còi - Báo cháy"
+      },
+      "buzzer_beeping": {
+        "name": "Còi - Bíp"
+      }
+    },
+    "fan": {
+      "cooling_fan": {
+        "name": "Quạt làm mát"
+      },
+      "aux_fan": {
+        "name": "Quạt phụ"
+      },
+      "chamber_fan": {
+        "name": "Quạt buồng máy"
+      },
+      "secondary_aux_fan": {
+        "name": "Quạt phụ thứ hai"
+      }
+    },
+    "image": {
+      "p1p_camera": {
+        "name": "Camera"
+      },
+      "cover_image": {
+        "name": "Ảnh bìa"
+      },
+      "pick_image": {
+        "name": "Ảnh chọn"
+      }
+    },
+    "light": {
+      "chamber_light": {
+        "name": "Đèn buồng máy"
+      },
+      "camera_light": {
+        "name": "Đèn camera"
+      },
+      "heatbed_light": {
+        "name": "Đèn bàn nhiệt"
+      }
+    },
+    "number": {
+      "target_bed_temperature": {
+        "name": "Nhiệt độ mục tiêu bàn in"
+      },
+      "target_nozzle_temperature": {
+        "name": "Nhiệt độ mục tiêu đầu phun"
+      },
+      "target_chamber_temperature": {
+        "name": "Nhiệt độ mục tiêu buồng máy"
+      }
+    },
+    "select": {
+      "printing_speed": {
+        "name": "Tốc độ in",
+        "state": {
+          "silent": "Im lặng",
+          "standard": "Tiêu chuẩn",
+          "sport": "Thể thao",
+          "ludicrous": "Tối đa"
+        }
+      },
+      "airduct_mode": {
+        "name": "Chế độ ống gió",
+        "state": {
+          "cooling": "Làm mát",
+          "heating": "Gia nhiệt"
+        }
+      }
+    },
+    "sensor": {
+      "airduct_mode": {
+        "name": "Chế độ ống gió",
+        "state": {
+          "cooling": "Làm mát",
+          "heating": "Gia nhiệt",
+          "laser": "Laser"
+        }
+      },
+      "tool_module": {
+        "name": "Module công cụ",
+        "state": {
+          "none": "Chưa lắp",
+          "laser10": "Laser (10W)",
+          "laser40": "Laser (40W)",
+          "cutter": "Dao cắt"
+        }
+      },
+      "wifi_signal": {
+        "name": "Tín hiệu Wi-Fi"
+      },
+      "bed_temp": {
+        "name": "Nhiệt độ bàn in"
+      },
+      "target_bed_temp": {
+        "name": "Nhiệt độ mục tiêu bàn in"
+      },
+      "chamber_temp": {
+        "name": "Nhiệt độ buồng máy"
+      },
+      "target_chamber_temp": {
+        "name": "Nhiệt độ mục tiêu buồng máy"
+      },
+      "target_nozzle_temp": {
+        "name": "Nhiệt độ mục tiêu đầu phun"
+      },
+      "nozzle_temp": {
+        "name": "Nhiệt độ đầu phun"
+      },
+      "left_nozzle_temp": {
+        "name": "Nhiệt độ đầu phun trái"
+      },
+      "left_target_nozzle_temp": {
+        "name": "Nhiệt độ mục tiêu đầu phun trái"
+      },
+      "right_nozzle_temp": {
+        "name": "Nhiệt độ đầu phun phải"
+      },
+      "right_target_nozzle_temp": {
+        "name": "Nhiệt độ mục tiêu đầu phun phải"
+      },
+      "aux_fan_speed": {
+        "name": "Tốc độ quạt phụ"
+      },
+      "cooling_fan_speed": {
+        "name": "Tốc độ quạt làm mát"
+      },
+      "chamber_fan_speed": {
+        "name": "Tốc độ quạt buồng máy"
+      },
+      "heatbreak_fan_speed": {
+        "name": "Tốc độ quạt làm mát họng nhiệt"
+      },
+      "model_download_percentage": {
+        "name": "Tải xuống model"
+      },
+      "speed_profile": {
+        "name": "Hồ sơ tốc độ",
+        "state": {
+          "silent": "Im lặng",
+          "standard": "Tiêu chuẩn",
+          "sport": "Thể thao",
+          "ludicrous": "Tối đa"
+        },
+        "state_attributes": {
+          "modifier": {
+            "name": "Hệ số điều chỉnh"
+          }
+        }
+      },
+      "printer_name": {
+        "name": "Tên máy in"
+      },
+      "stage": {
+        "name": "Giai đoạn hiện tại",
+        "state": {
+          "offline": "Ngoại tuyến",
+          "printing": "Đang in",
+          "auto_bed_leveling": "Cân bằng bàn tự động",
+          "heatbed_preheating": "Đang làm nóng bàn in",
+          "sweeping_xy_mech_mode": "Quét cơ cấu XY",
+          "changing_filament": "Đang thay sợi nhựa",
+          "m400_pause": "Tạm dừng M400",
+          "paused_filament_runout": "Tạm dừng: hết sợi nhựa",
+          "heating_hotend": "Đang gia nhiệt đầu phun",
+          "calibrating_extrusion": "Hiệu chỉnh đùn",
+          "scanning_bed_surface": "Quét bề mặt bàn in",
+          "inspecting_first_layer": "Kiểm tra lớp đầu tiên",
+          "identifying_build_plate_type": "Xác định loại bàn in",
+          "calibrating_micro_lidar": "Hiệu chỉnh micro lidar",
+          "homing_toolhead": "Đang về vị trí gốc",
+          "cleaning_nozzle_tip": "Làm sạch đầu phun",
+          "checking_extruder_temperature": "Kiểm tra nhiệt độ đùn",
+          "paused_user": "Tạm dừng bởi người dùng",
+          "paused_front_cover_falling": "Tạm dừng: nắp trước",
+          "calibrating_extrusion_flow": "Hiệu chỉnh lưu lượng đùn",
+          "paused_nozzle_temperature_malfunction": "Tạm dừng: lỗi nhiệt độ đầu phun",
+          "paused_heat_bed_temperature_malfunction": "Tạm dừng: lỗi nhiệt độ bàn in",
+          "filament_unloading": "Đang tháo sợi nhựa",
+          "paused_skipped_step": "Tạm dừng: bỏ qua bước",
+          "filament_loading": "Đang nạp sợi nhựa",
+          "calibrating_motor_noise": "Hiệu chỉnh tiếng ồn động cơ",
+          "paused_ams_lost": "Tạm dừng: mất kết nối AMS",
+          "paused_low_fan_speed_heat_break": "Tạm dừng: quạt họng nhiệt thấp",
+          "paused_chamber_temperature_control_error": "Tạm dừng: lỗi nhiệt độ buồng máy",
+          "cooling_chamber": "Đang làm mát buồng máy",
+          "paused_user_gcode": "Tạm dừng: lệnh G-code",
+          "motor_noise_showoff": "Trình diễn tiếng ồn động cơ",
+          "paused_nozzle_filament_covered_detected": "Tạm dừng: đầu phun bị che",
+          "paused_cutter_error": "Tạm dừng: lỗi dao cắt",
+          "paused_first_layer_error": "Tạm dừng: lỗi lớp đầu tiên",
+          "paused_nozzle_clog": "Tạm dừng: tắc đầu phun",
+          "check_absolute_accuracy_before_calibration": "Kiểm tra độ chính xác trước hiệu chỉnh",
+          "absolute_accuracy_calibration": "Hiệu chỉnh độ chính xác tuyệt đối",
+          "check_absolute_accuracy_after_calibration": "Kiểm tra độ chính xác sau hiệu chỉnh",
+          "calibrate_nozzle_offset": "Hiệu chỉnh độ lệch đầu phun",
+          "bed_level_high_temperature": "Cân bằng bàn nhiệt độ cao",
+          "check_quick_release": "Kiểm tra tự động: chốt tháo nhanh",
+          "check_door_and_cover": "Kiểm tra tự động: cửa và nắp trên",
+          "laser_calibration": "Hiệu chỉnh laser",
+          "check_plaform": "Kiểm tra tự động: nền tảng",
+          "check_birdeye_camera_position": "Kiểm tra tự động: camera nhìn từ trên",
+          "calibrate_birdeye_camera": "Hiệu chỉnh camera nhìn từ trên",
+          "bed_level_phase_1": "Cân bằng bàn tự động - giai đoạn 1",
+          "bed_level_phase_2": "Cân bằng bàn tự động - giai đoạn 2",
+          "heating_chamber": "Đang gia nhiệt buồng máy",
+          "heated_bedcooling": "Đang làm mát bàn in",
+          "print_calibration_lines": "Đang in đường hiệu chỉnh",
+          "check_material": "Kiểm tra tự động: vật liệu",
+          "calibrating_live_view_camera": "Hiệu chỉnh camera xem trực tiếp",
+          "waiting_for_heatbed_temperature": "Chờ nhiệt độ bàn in",
+          "check_material_position": "Kiểm tra tự động: vị trí vật liệu",
+          "calibrating_cutter_model_offset": "Hiệu chỉnh độ lệch module dao cắt",
+          "measuring_surface": "Đo bề mặt",
+          "thermal_preconditioning": "Điều kiện nhiệt trước",
+          "idle": "Chờ"
+        }
+      },
+      "sdcard_status": {
+        "name": "Trạng thái thẻ SD",
+        "state": {
+          "missing": "Không có",
+          "normal": "Bình thường",
+          "abnormal": "Bất thường",
+          "readonly": "Chỉ đọc"
+        }
+      },
+      "print_progress": {
+        "name": "Tiến độ in"
+      },
+      "print_status": {
+        "name": "Trạng thái in",
+        "state": {
+          "failed": "Thất bại",
+          "finish": "Hoàn tất",
+          "idle": "Chờ",
+          "offline": "Ngoại tuyến",
+          "prepare": "Đang chuẩn bị",
+          "running": "Đang chạy",
+          "pause": "Tạm dừng",
+          "slicing": "Đang cắt lớp",
+          "init": "Đang khởi tạo"
+        }
+      },
+      "printable_objects": {
+        "name": "Đối tượng có thể in"
+      },
+      "skipped_objects": {
+        "name": "Đối tượng bị bỏ qua"
+      },
+      "mqtt_mode": {
+        "name": "Chế độ kết nối MQTT",
+        "state": {
+          "local": "Cục bộ",
+          "bambu_cloud": "Bambu Lab cloud"
+        }
+      },
+      "gcode_file": {
+        "name": "Tên file Gcode"
+      },
+      "gcode_file_downloaded": {
+        "name": "File Gcode đã tải xuống"
+      },
+      "remaining_drying_time": {
+        "name": "Thời gian sấy còn lại"
+      },
+      "ams_temp": {
+        "name": "Nhiệt độ"
+      },
+      "humidity": {
+        "name": "Độ ẩm"
+      },
+      "print_bed_type": {
+        "name": "Loại bàn in",
+        "state": {
+          "textured_plate": "Bàn có vân",
+          "cool_plate": "Cool Plate / Bàn PLA",
+          "hot_plate": "Bàn PEI mịn / Bàn nhiệt độ cao",
+          "eng_plate": "Bàn kỹ thuật",
+          "supertack_plate": "Cool Plate SuperTack"
+        }
+      },
+      "print_length": {
+        "name": "Chiều dài in"
+      },
+      "print_weight": {
+        "name": "Khối lượng in"
+      },
+      "subtask_name": {
+        "name": "Tên tác vụ"
+      },
+      "print_type": {
+        "name": "Loại in",
+        "state": {
+          "local": "Cục bộ",
+          "cloud": "Cloud",
+          "idle": "Chờ",
+          "unknown": "Không xác định"
+        }
+      },
+      "start_time": {
+        "name": "Thời gian bắt đầu"
+      },
+      "remaining_time": {
+        "name": "Thời gian còn lại"
+      },
+      "end_time": {
+        "name": "Thời gian kết thúc"
+      },
+      "total_usage_hours": {
+        "name": "Tổng giờ sử dụng"
+      },
+      "current_layer": {
+        "name": "Lớp hiện tại"
+      },
+      "total_layers": {
+        "name": "Tổng số lớp"
+      },
+      "active_tray": {
+        "name": "Khay đang hoạt động",
+        "state": {
+          "none": "Không có"
+        }
+      },
+      "nozzle_diameter": {
+        "name": "Kích thước đầu phun"
+      },
+      "nozzle_type": {
+        "name": "Loại đầu phun",
+        "state": {
+          "hardened_steel": "Thép cứng",
+          "stainless_steel": "Thép không gỉ",
+          "tungsten_carbide": "Vonfram carbide",
+          "high_flow_hardened_steel": "Thép cứng lưu lượng cao",
+          "high_flow_stainless_steel": "Thép không gỉ lưu lượng cao",
+          "high_flow_tungsten_carbide": "Vonfram carbide lưu lượng cao",
+          "unknown": "Không xác định"
+        }
+      },
+      "left_nozzle_diameter": {
+        "name": "Kích thước đầu phun trái"
+      },
+      "left_nozzle_type": {
+        "name": "Loại đầu phun trái",
+        "state": {
+          "hardened_steel": "Thép cứng",
+          "stainless_steel": "Thép không gỉ",
+          "tungsten_carbide": "Vonfram carbide",
+          "high_flow_hardened_steel": "Thép cứng lưu lượng cao",
+          "high_flow_stainless_steel": "Thép không gỉ lưu lượng cao",
+          "high_flow_tungsten_carbide": "Vonfram carbide lưu lượng cao"
+        }
+      },
+      "right_nozzle_diameter": {
+        "name": "Kích thước đầu phun phải"
+      },
+      "right_nozzle_type": {
+        "name": "Loại đầu phun phải",
+        "state": {
+          "hardened_steel": "Thép cứng",
+          "stainless_steel": "Thép không gỉ",
+          "tungsten_carbide": "Vonfram carbide",
+          "high_flow_hardened_steel": "Thép cứng lưu lượng cao",
+          "high_flow_stainless_steel": "Thép không gỉ lưu lượng cao",
+          "high_flow_tungsten_carbide": "Vonfram carbide lưu lượng cao"
+        }
+      },
+      "ip_address": {
+        "name": "Địa chỉ IP"
+      },
+      "serial": {
+        "name": "Số serial"
+      },
+      "humidity_index": {
+        "name": "Chỉ số độ ẩm"
+      },
+      "external_spool": {
+        "name": "Cuộn ngoài",
+        "state_attributes": {
+          "active": { "name": "Đang hoạt động" },
+          "bed_temp": { "name": "Nhiệt độ bàn in" },
+          "color": { "name": "Màu sắc" },
+          "cols": { "name": "Các màu" },
+          "ctype": { "name": "Loại màu" },
+          "dry_temp": { "name": "Nhiệt độ sấy" },
+          "dry_time": { "name": "Thời gian sấy" },
+          "empty": { "name": "Rỗng" },
+          "k_value": { "name": "Giá trị K" },
+          "name": { "name": "Tên" },
+          "nozzle_temp_min": { "name": "Nhiệt độ đầu phun tối thiểu" },
+          "nozzle_temp_max": { "name": "Nhiệt độ đầu phun tối đa" },
+          "remain": { "name": "Sợi nhựa còn lại" },
+          "remain_enabled": { "name": "Bật ước tính sợi nhựa còn lại" },
+          "tag_uid": { "name": "Số serial cuộn" },
+          "type": { "name": "Loại" },
+          "filament_id": { "name": "ID sợi nhựa" },
+          "tray_weight": { "name": "Khối lượng sợi nhựa tối đa" }
+        }
+      },
+      "tray_1": {
+        "name": "Khay 1",
+        "state_attributes": {
+          "active": { "name": "Đang hoạt động" },
+          "bed_temp": { "name": "Nhiệt độ bàn in" },
+          "color": { "name": "Màu sắc" },
+          "cols": { "name": "Các màu" },
+          "ctype": { "name": "Loại màu" },
+          "dry_temp": { "name": "Nhiệt độ sấy" },
+          "dry_time": { "name": "Thời gian sấy" },
+          "empty": { "name": "Rỗng" },
+          "k_value": { "name": "Giá trị K" },
+          "name": { "name": "Tên" },
+          "nozzle_temp_min": { "name": "Nhiệt độ đầu phun tối thiểu" },
+          "nozzle_temp_max": { "name": "Nhiệt độ đầu phun tối đa" },
+          "remain": { "name": "Sợi nhựa còn lại" },
+          "remain_enabled": { "name": "Bật ước tính sợi nhựa còn lại" },
+          "tag_uid": { "name": "Số serial cuộn" },
+          "type": { "name": "Loại" },
+          "filament_id": { "name": "ID sợi nhựa" },
+          "tray_weight": { "name": "Khối lượng sợi nhựa tối đa" }
+        }
+      },
+      "tray_2": {
+        "name": "Khay 2",
+        "state_attributes": {
+          "active": { "name": "Đang hoạt động" },
+          "bed_temp": { "name": "Nhiệt độ bàn in" },
+          "color": { "name": "Màu sắc" },
+          "cols": { "name": "Các màu" },
+          "ctype": { "name": "Loại màu" },
+          "dry_temp": { "name": "Nhiệt độ sấy" },
+          "dry_time": { "name": "Thời gian sấy" },
+          "empty": { "name": "Rỗng" },
+          "k_value": { "name": "Giá trị K" },
+          "name": { "name": "Tên" },
+          "nozzle_temp_min": { "name": "Nhiệt độ đầu phun tối thiểu" },
+          "nozzle_temp_max": { "name": "Nhiệt độ đầu phun tối đa" },
+          "remain": { "name": "Sợi nhựa còn lại" },
+          "remain_enabled": { "name": "Bật ước tính sợi nhựa còn lại" },
+          "tag_uid": { "name": "Số serial cuộn" },
+          "type": { "name": "Loại" },
+          "filament_id": { "name": "ID sợi nhựa" },
+          "tray_weight": { "name": "Khối lượng sợi nhựa tối đa" }
+        }
+      },
+      "tray_3": {
+        "name": "Khay 3",
+        "state_attributes": {
+          "active": { "name": "Đang hoạt động" },
+          "bed_temp": { "name": "Nhiệt độ bàn in" },
+          "color": { "name": "Màu sắc" },
+          "cols": { "name": "Các màu" },
+          "ctype": { "name": "Loại màu" },
+          "dry_temp": { "name": "Nhiệt độ sấy" },
+          "dry_time": { "name": "Thời gian sấy" },
+          "empty": { "name": "Rỗng" },
+          "k_value": { "name": "Giá trị K" },
+          "name": { "name": "Tên" },
+          "nozzle_temp_min": { "name": "Nhiệt độ đầu phun tối thiểu" },
+          "nozzle_temp_max": { "name": "Nhiệt độ đầu phun tối đa" },
+          "remain": { "name": "Sợi nhựa còn lại" },
+          "remain_enabled": { "name": "Bật ước tính sợi nhựa còn lại" },
+          "tag_uid": { "name": "Số serial cuộn" },
+          "type": { "name": "Loại" },
+          "filament_id": { "name": "ID sợi nhựa" },
+          "tray_weight": { "name": "Khối lượng sợi nhựa tối đa" }
+        }
+      },
+      "tray_4": {
+        "name": "Khay 4",
+        "state_attributes": {
+          "active": { "name": "Đang hoạt động" },
+          "bed_temp": { "name": "Nhiệt độ bàn in" },
+          "color": { "name": "Màu sắc" },
+          "cols": { "name": "Các màu" },
+          "ctype": { "name": "Loại màu" },
+          "dry_temp": { "name": "Nhiệt độ sấy" },
+          "dry_time": { "name": "Thời gian sấy" },
+          "empty": { "name": "Rỗng" },
+          "k_value": { "name": "Giá trị K" },
+          "name": { "name": "Tên" },
+          "nozzle_temp_min": { "name": "Nhiệt độ đầu phun tối thiểu" },
+          "nozzle_temp_max": { "name": "Nhiệt độ đầu phun tối đa" },
+          "remain": { "name": "Sợi nhựa còn lại" },
+          "remain_enabled": { "name": "Bật ước tính sợi nhựa còn lại" },
+          "tag_uid": { "name": "Số serial cuộn" },
+          "type": { "name": "Loại" },
+          "filament_id": { "name": "ID sợi nhựa" },
+          "tray_weight": { "name": "Khối lượng sợi nhựa tối đa" }
+        }
+      },
+      "hotend_rack_holder_position": {
+        "name": "Vị trí giá đỡ",
+        "state": {
+          "unknown": "Không xác định",
+          "a_top": "Vị trí A",
+          "b_top": "Vị trí B",
+          "centre": "Giữa"
+        }
+      },
+      "hotend_rack_holder_state": {
+        "name": "Trạng thái giá đỡ",
+        "state": {
+          "unknown": "Không xác định",
+          "idle": "Chờ",
+          "hotend_centre": "Đang căn giữa đầu phun",
+          "toolhead_centre": "Đang căn giữa đầu công cụ",
+          "calibrate_hotend_rack": "Đang hiệu chỉnh giá",
+          "cut_material": "Đang cắt vật liệu",
+          "unlock_hotend": "Đang mở khóa đầu phun",
+          "lift_hotend_rack": "Đang nâng giá",
+          "place_hotend": "Đang đặt đầu phun",
+          "pick_hotend": "Đang lấy đầu phun",
+          "lock_hotend": "Đang khóa đầu phun"
+        }
+      },
+      "hotend_rack_hotend": {
+        "name": "Đầu phun {hotend_id}",
+        "state": {
+          "mounted": "Đã lắp",
+          "docked": "Đang đỗ",
+          "empty": "Rỗng"
+        },
+        "state_attributes": {
+          "slot": { "name": "Khe cắm" },
+          "nozzle_type": {
+            "name": "Loại đầu phun",
+            "state": {
+              "hardened_steel": "Thép cứng",
+              "stainless_steel": "Thép không gỉ",
+              "tungsten_carbide": "Vonfram carbide",
+              "high_flow_hardened_steel": "Thép cứng lưu lượng cao",
+              "high_flow_stainless_steel": "Thép không gỉ lưu lượng cao",
+              "high_flow_tungsten_carbide": "Vonfram carbide lưu lượng cao",
+              "unknown": "Không xác định"
+            }
+          },
+          "nozzle_diameter": { "name": "Đường kính đầu phun" },
+          "serial": { "name": "Số serial" },
+          "max_temp": { "name": "Nhiệt độ tối đa" },
+          "wear": { "name": "Độ mài mòn" },
+          "status": {
+            "name": "Trạng thái",
+            "state": {
+              "normal": "Bình thường",
+              "abnormal": "Bất thường",
+              "unknown": "Không xác định"
+            }
+          },
+          "color": { "name": "Màu sắc" },
+          "filament_id": { "name": "ID sợi nhựa" },
+          "filament_name": { "name": "Tên sợi nhựa" }
+        }
+      }
+    },
+    "camera": {
+      "camera": {
+        "name": "Camera"
+      }
+    },
+    "switch": {
+      "camera": {
+        "name": "Camera"
+      },
+      "imagecamera": {
+        "name": "Camera cảm biến hình ảnh"
+      },
+      "ftp": {
+        "name": "Tải dữ liệu model"
+      },
+      "prompt_sound": {
+        "name": "Âm thanh thông báo"
+      }
+    },
+    "update": {
+      "firmware_update": {
+        "name": "Cập nhật firmware"
+      }
+    }
+  },
+  "selector": {
+    "configuration_type": {
+      "options": {
+        "bambu": "Bambu Lab cloud",
+        "lan": "Chế độ Lan"
+      }
+    }
+  },
+  "issues": {
+    "authentication_failed": {
+      "title": "Xác thực thất bại",
+      "description": "Kết nối đến Bambu Lab thất bại cho thiết bị {device}. Vui lòng cấu hình lại tích hợp và cung cấp thông tin xác thực mới."
+    },
+    "no_external_storage": {
+      "title": "Không phát hiện USB hoặc thẻ SD",
+      "description": "{device} không có USB hoặc thẻ SD được kết nối. Điều này cần thiết cho tất cả các tính năng phụ thuộc vào FTP đến máy in như ảnh bìa, bỏ qua đối tượng và lịch sử in."
+    },
+    "live_view_disabled": {
+      "title": "Xem trực tiếp bị tắt",
+      "description": "{device} đã tắt xem trực tiếp trong cài đặt máy in. Vui lòng bật để sử dụng các tính năng camera."
+    },
+    "mqtt_encryption_enabled": {
+      "title": "Mã hóa MQTT được bật",
+      "description": "{device} đang kết nối cloud với mã hóa MQTT được bật. Chỉ có thể điều khiển đèn qua tích hợp này. Tất cả các điều khiển khác không khả dụng. Máy in phải được đặt sang chế độ LAN dành cho nhà phát triển để cho phép điều khiển từ Home Assistant."
+    },
+    "hybrid_mode_blocking": {
+      "title": "Kết nối lai chặn điều khiển",
+      "description": "{device} đang kết nối cloud nhưng tích hợp dùng kết nối mqtt cục bộ. Điều này chặn việc đặt nhiệt độ và in lại từ lịch sử. Chuyển kết nối sang cloud thuần túy để bật điều khiển đầy đủ."
+    }
+  }
+}
