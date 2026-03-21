@@ -395,7 +395,7 @@
         "name": "Tốc độ quạt buồng máy"
       },
       "heatbreak_fan_speed": {
-        "name": "Tốc độ quạt làm mát họng nhiệt"
+        "name": "Tốc độ quạt đầu in"
       },
       "model_download_percentage": {
         "name": "Tải xuống model"
@@ -643,7 +643,7 @@
       "external_spool": {
         "name": "Cuộn nhựa ngoài",
         "state_attributes": {
-          "active": { "name": "Đang hoạt động" },
+          "active": { "name": "Trạng thái hoạt động" },
           "bed_temp": { "name": "Nhiệt độ bàn in" },
           "color": { "name": "Màu sắc" },
           "cols": { "name": "Các màu" },
@@ -666,7 +666,7 @@
       "tray_1": {
         "name": "Khay 1",
         "state_attributes": {
-          "active": { "name": "Đang hoạt động" },
+          "active": { "name": "Trạng thái hoạt động" },
           "bed_temp": { "name": "Nhiệt độ bàn in" },
           "color": { "name": "Màu sắc" },
           "cols": { "name": "Các màu" },
@@ -689,7 +689,7 @@
       "tray_2": {
         "name": "Khay 2",
         "state_attributes": {
-          "active": { "name": "Đang hoạt động" },
+          "active": { "name": "Trạng thái hoạt động" },
           "bed_temp": { "name": "Nhiệt độ bàn in" },
           "color": { "name": "Màu sắc" },
           "cols": { "name": "Các màu" },
@@ -712,7 +712,7 @@
       "tray_3": {
         "name": "Khay 3",
         "state_attributes": {
-          "active": { "name": "Đang hoạt động" },
+          "active": { "name": "Trạng thái hoạt động" },
           "bed_temp": { "name": "Nhiệt độ bàn in" },
           "color": { "name": "Màu sắc" },
           "cols": { "name": "Các màu" },
@@ -735,7 +735,7 @@
       "tray_4": {
         "name": "Khay 4",
         "state_attributes": {
-          "active": { "name": "Đang hoạt động" },
+          "active": { "name": "Trạng thái hoạt động" },
           "bed_temp": { "name": "Nhiệt độ bàn in" },
           "color": { "name": "Màu sắc" },
           "cols": { "name": "Các màu" },
