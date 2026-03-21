@@ -207,7 +207,7 @@
   "entity": {
     "binary_sensor": {
       "active_ams": {
-        "name": "Đang hoạt động"
+        "name": "Trạng thái hoạt động"
       },
       "drying": {
         "name": "Đang sấy"
@@ -447,7 +447,7 @@
           "filament_loading": "Đang nạp sợi nhựa",
           "calibrating_motor_noise": "Hiệu chỉnh tiếng ồn động cơ",
           "paused_ams_lost": "Tạm dừng: mất kết nối AMS",
-          "paused_low_fan_speed_heat_break": "Tạm dừng: quạt họng nhiệt thấp",
+          "paused_low_fan_speed_heat_break": "Tạm dừng: quạt đầu in thấp",
           "paused_chamber_temperature_control_error": "Tạm dừng: lỗi nhiệt độ buồng máy",
           "cooling_chamber": "Đang làm mát buồng máy",
           "paused_user_gcode": "Tạm dừng: lệnh G-code",
