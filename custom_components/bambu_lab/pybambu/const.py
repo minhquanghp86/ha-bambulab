@@ -23,6 +23,19 @@ class Printers(StrEnum):
     X1C = "X1C"
     X1 = "X1"
 
+class WikiPrinterTag(StrEnum):
+    A1 = "a1"
+    A1MINI = "a1-mini"
+    P1P = "p1"
+    P1S = "p1"
+    P2S = "p2"
+    H2C = "h2"
+    H2D = "h2"
+    H2DPRO = "h2"
+    H2S = "h2"
+    X1E = "x1"
+    X1C = "x1"
+    X1 = "x1"
 
 class Features(IntEnum):
     AUX_FAN = 1,
@@ -129,6 +142,15 @@ CURRENT_STAGE_IDS = {
     56: "calibrating_cutter_model_offset",
     57: "measuring_surface",
     58: "thermal_preconditioning",
+    59: "homing_blade_holder",
+    60: "calibrating_camera_offset",
+    61: "calibrating_blade_holder_position",
+    62: "hotend_pick_place_test",
+    63: "waiting_chamber_temperature_equalize",
+    64: "preparing_hotend",
+    65: "calibrating_detection_nozzle_clumping",
+    66: "purifying_chamber_air",
+    77: "preparing_ams",
     # X1 returns -1 for idle
     -1: "idle",  # DUPLICATED
     # P1 returns 255 for idle

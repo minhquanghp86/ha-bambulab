@@ -239,9 +239,6 @@
       "drying": {
         "name": "Drogen"
       },
-      "airduct_mode": {
-        "name": "Luchtkanaalmodus"
-      },
       "hybrid_mode_blocks_control": {
         "name": "Hybride MQTT blokkeert de controle"
       }
@@ -327,6 +324,13 @@
           "standard": "Standaard",
           "sport": "Sportief",
           "ludicrous": "Belachelijk snel"
+        }
+      },
+      "airduct_mode": {
+        "name": "Luchtkanaalmodus",
+        "state": {
+          "cooling": "Koeling",
+          "heating": "Verwarming"
         }
       }
     },
@@ -449,7 +453,16 @@
           "check_material_position": "Automatische controle: materiaalpositie",
           "calibrating_cutter_model_offset": "Kalibratie van de snijmodule-offset",
           "measuring_surface": "Meetoppervlak",
-          "thermal_preconditioning": "Thermische preconditionering voor optimalisatie van de eerste laag"
+          "thermal_preconditioning": "Thermische preconditionering voor optimalisatie van de eerste laag",
+          "homing_blade_holder": "Homing meshouder",
+          "calibrating_camera_offset": "Camera-offset kalibreren",
+          "calibrating_blade_holder_position": "Kalibreren van de positie van de meshouder",
+          "hotend_pick_place_test": "Hotend pick-and-place-test",
+          "waiting_chamber_temperature_equalize": "Wachten tot de kamertemperatuur gelijk is",
+          "preparing_hotend": "Hotend voorbereiden",
+          "calibrating_detection_nozzle_clumping": "Kalibreren van de detectiepositie van klontvorming in de spuitmond",
+          "purifying_chamber_air": "Kamerlucht zuiveren",
+          "preparing_ams": "AMS voorbereiden"
         }
       },
       "print_progress": {
@@ -614,17 +627,32 @@
           }
         }
       },
-      "tray_1": {
-        "name": "Tray 1",
+      "tray": {
+        "name": "Tray {tray_number}",
         "state_attributes": {
+          "slot": {
+            "name": "Sleuf"
+          },
           "active": {
             "name": "Actief"
+          },
+          "bed_temp": {
+            "name": "Bedtemperatuur"
           },
           "color": {
             "name": "Kleur"
           },
           "cols": {
             "name": "Kleuren"
+          },
+          "ctype": {
+            "name": "Kleurtype"
+          },
+          "dry_temp": {
+            "name": "Droogtemperatuur"
+          },
+          "dry_time": {
+            "name": "Droogtijd"
           },
           "empty": {
             "name": "Leeg"
@@ -644,126 +672,14 @@
           "remain": {
             "name": "Resterend filament"
           },
-          "tag_uid": {
-            "name": "Serienummer van spoel"
-          },
-          "type": {
-            "name": "Type"
-          },
-          "remain_enabled": {
-            "name": "Resterende schatting van de gloeidraad ingeschakeld"
-          },
-          "filament_id": {
-            "name": "Filament -ID"
-          },
-          "tray_weight": {
-            "name": "Maximaal gewicht van de gloeidraad"
-          },
-          "bed_temp": {
-            "name": "Bedtemperatuur"
-          },
-          "ctype": {
-            "name": "Kleurtype"
-          },
-          "dry_temp": {
-            "name": "Droogtemperatuur"
-          },
-          "dry_time": {
-            "name": "Droogtijd"
-          }
-        }
-      },
-      "tray_2": {
-        "name": "Tray 2",
-        "state_attributes": {
-          "active": {
-            "name": "Actief"
-          },
-          "color": {
-            "name": "Kleur"
-          },
-          "cols": {
-            "name": "Kleuren"
-          },
-          "empty": {
-            "name": "Leeg"
-          },
-          "k_value": {
-            "name": "K-waarde"
-          },
-          "name": {
-            "name": "Naam"
-          },
-          "nozzle_temp_min": {
-            "name": "Minimumtemperatuur nozzle"
-          },
-          "nozzle_temp_max": {
-            "name": "Maximumtemperatuur nozzle"
-          },
-          "remain": {
-            "name": "Resterend filament"
-          },
-          "tag_uid": {
-            "name": "Serienummer van spoel"
-          },
-          "type": {
-            "name": "Type"
-          },
-          "filament_id": {
-            "name": "Filament -ID"
-          },
-          "tray_weight": {
-            "name": "Maximaal gewicht van de gloeidraad"
-          },
           "remain_enabled": {
             "name": "Resterende schatting van de filament ingeschakeld"
           },
-          "bed_temp": {
-            "name": "Bedtemperatuur"
-          },
-          "ctype": {
-            "name": "Kleurtype"
-          },
-          "dry_temp": {
-            "name": "Droogtemperatuur"
-          },
-          "dry_time": {
-            "name": "Droogtijd"
-          }
-        }
-      },
-      "tray_3": {
-        "name": "Tray 3",
-        "state_attributes": {
-          "active": {
-            "name": "Actief"
-          },
-          "color": {
-            "name": "Kleur"
-          },
-          "cols": {
-            "name": "Kleuren"
-          },
-          "empty": {
-            "name": "Leeg"
-          },
-          "k_value": {
-            "name": "K-waarde"
-          },
-          "name": {
-            "name": "Name"
-          },
-          "nozzle_temp_min": {
-            "name": "Minimumtemperatuur nozzle"
-          },
-          "nozzle_temp_max": {
-            "name": "Maximumtemperatuur nozzle"
-          },
-          "remain": {
-            "name": "Resterend filament"
-          },
           "tag_uid": {
             "name": "Serienummer van spoel"
+          },
+          "tray_uuid": {
+            "name": "Tray UUID"
           },
           "type": {
             "name": "Type"
@@ -773,80 +689,6 @@
           },
           "tray_weight": {
             "name": "Maximaal gewicht van de gloeidraad"
-          },
-          "remain_enabled": {
-            "name": "Resterende schatting van de filament ingeschakeld"
-          },
-          "bed_temp": {
-            "name": "Bedtemperatuur"
-          },
-          "ctype": {
-            "name": "Kleurtype"
-          },
-          "dry_temp": {
-            "name": "Droogtemperatuur"
-          },
-          "dry_time": {
-            "name": "Droogtijd"
-          }
-        }
-      },
-      "tray_4": {
-        "name": "Tray 4",
-        "state_attributes": {
-          "active": {
-            "name": "Actief"
-          },
-          "color": {
-            "name": "Kleur"
-          },
-          "cols": {
-            "name": "Kleuren"
-          },
-          "empty": {
-            "name": "Leeg"
-          },
-          "k_value": {
-            "name": "K-waarde"
-          },
-          "name": {
-            "name": "Naam"
-          },
-          "nozzle_temp_min": {
-            "name": "Minimumtemperatuur nozzle"
-          },
-          "nozzle_temp_max": {
-            "name": "Maximumtemperatuur nozzle"
-          },
-          "remain": {
-            "name": "Resterend filament"
-          },
-          "tag_uid": {
-            "name": "Serienummer van spoel"
-          },
-          "type": {
-            "name": "Type"
-          },
-          "filament_id": {
-            "name": "Filament -ID"
-          },
-          "tray_weight": {
-            "name": "Maximaal gewicht van de gloeidraad"
-          },
-          "remain_enabled": {
-            "name": "Resterende schatting van de filament ingeschakeld"
-          },
-          "bed_temp": {
-            "name": "Bedtemperatuur"
-          },
-          "ctype": {
-            "name": "Kleurtype"
-          },
-          "dry_temp": {
-            "name": "Droogtemperatuur"
-          },
-          "dry_time": {
-            "name": "Droogtijd"
           }
         }
       },
@@ -1001,6 +843,14 @@
             "name": "Naam van het filament"
           }
         }
+      },
+      "airduct_mode": {
+        "name": "Luchtkanaalmodus",
+        "state": {
+          "cooling": "Koeling",
+          "heating": "Verwarming",
+          "laser": "Laser"
+        }
       }
     },
     "camera": {
@@ -1020,9 +870,6 @@
       },
       "prompt_sound": {
         "name": "Toestaan van bevestigingsgeluiden"
-      },
-      "airduct_mode": {
-        "name": "Koelmodus of verwarmings-/filtermodus"
       }
     },
     "update": {
