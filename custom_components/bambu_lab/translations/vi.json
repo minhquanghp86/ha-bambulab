@@ -240,7 +240,7 @@
         "name": "Firmware"
       },
       "extruder_filament_state": {
-        "name": "Trạng thái sợi nhựa"
+        "name": "Trạng thái sợi nhựa đùn"
       }
     },
     "button": {
@@ -479,6 +479,15 @@
           "calibrating_cutter_model_offset": "Hiệu chỉnh độ lệch module dao cắt",
           "measuring_surface": "Đo bề mặt",
           "thermal_preconditioning": "Điều kiện nhiệt trước",
+          "homing_blade_holder": "Đang về vị trí gốc của giá dao",
+          "calibrating_camera_offset": "Hiệu chỉnh độ lệch camera",
+          "calibrating_blade_holder_position": "Hiệu chỉnh vị trí giá dao",
+          "hotend_pick_place_test": "Kiểm tra lắp rút đầu phun",
+          "waiting_chamber_temperature_equalize": "Chờ cân bằng nhiệt độ buồng máy",
+          "preparing_hotend": "Đang chuẩn bị đầu phun",
+          "calibrating_detection_nozzle_clumping": "Hiệu chỉnh vị trí phát hiện tắc đầu phun",
+          "purifying_chamber_air": "Lọc không khí buồng máy",
+          "preparing_ams": "Đang chuẩn bị AMS",
           "idle": "Chờ"
         }
       },
@@ -663,96 +672,69 @@
           "tray_weight": { "name": "Khối lượng sợi nhựa tối đa" }
         }
       },
-      "tray_1": {
-        "name": "Khay 1",
+      "tray": {
+        "name": "Khay {tray_number}",
         "state_attributes": {
-          "active": { "name": "Trạng thái hoạt động" },
-          "bed_temp": { "name": "Nhiệt độ bàn in" },
-          "color": { "name": "Màu sắc" },
-          "cols": { "name": "Các màu" },
-          "ctype": { "name": "Loại màu" },
-          "dry_temp": { "name": "Nhiệt độ sấy" },
-          "dry_time": { "name": "Thời gian sấy" },
-          "empty": { "name": "Rỗng" },
-          "k_value": { "name": "Giá trị K" },
-          "name": { "name": "Tên" },
-          "nozzle_temp_min": { "name": "Nhiệt độ đầu phun tối thiểu" },
-          "nozzle_temp_max": { "name": "Nhiệt độ đầu phun tối đa" },
-          "remain": { "name": "Sợi nhựa còn lại" },
-          "remain_enabled": { "name": "Bật ước tính sợi nhựa còn lại" },
-          "tag_uid": { "name": "Số serial cuộn" },
-          "type": { "name": "Loại" },
-          "filament_id": { "name": "ID sợi nhựa" },
-          "tray_weight": { "name": "Khối lượng sợi nhựa tối đa" }
-        }
-      },
-      "tray_2": {
-        "name": "Khay 2",
-        "state_attributes": {
-          "active": { "name": "Trạng thái hoạt động" },
-          "bed_temp": { "name": "Nhiệt độ bàn in" },
-          "color": { "name": "Màu sắc" },
-          "cols": { "name": "Các màu" },
-          "ctype": { "name": "Loại màu" },
-          "dry_temp": { "name": "Nhiệt độ sấy" },
-          "dry_time": { "name": "Thời gian sấy" },
-          "empty": { "name": "Rỗng" },
-          "k_value": { "name": "Giá trị K" },
-          "name": { "name": "Tên" },
-          "nozzle_temp_min": { "name": "Nhiệt độ đầu phun tối thiểu" },
-          "nozzle_temp_max": { "name": "Nhiệt độ đầu phun tối đa" },
-          "remain": { "name": "Sợi nhựa còn lại" },
-          "remain_enabled": { "name": "Bật ước tính sợi nhựa còn lại" },
-          "tag_uid": { "name": "Số serial cuộn" },
-          "type": { "name": "Loại" },
-          "filament_id": { "name": "ID sợi nhựa" },
-          "tray_weight": { "name": "Khối lượng sợi nhựa tối đa" }
-        }
-      },
-      "tray_3": {
-        "name": "Khay 3",
-        "state_attributes": {
-          "active": { "name": "Trạng thái hoạt động" },
-          "bed_temp": { "name": "Nhiệt độ bàn in" },
-          "color": { "name": "Màu sắc" },
-          "cols": { "name": "Các màu" },
-          "ctype": { "name": "Loại màu" },
-          "dry_temp": { "name": "Nhiệt độ sấy" },
-          "dry_time": { "name": "Thời gian sấy" },
-          "empty": { "name": "Rỗng" },
-          "k_value": { "name": "Giá trị K" },
-          "name": { "name": "Tên" },
-          "nozzle_temp_min": { "name": "Nhiệt độ đầu phun tối thiểu" },
-          "nozzle_temp_max": { "name": "Nhiệt độ đầu phun tối đa" },
-          "remain": { "name": "Sợi nhựa còn lại" },
-          "remain_enabled": { "name": "Bật ước tính sợi nhựa còn lại" },
-          "tag_uid": { "name": "Số serial cuộn" },
-          "type": { "name": "Loại" },
-          "filament_id": { "name": "ID sợi nhựa" },
-          "tray_weight": { "name": "Khối lượng sợi nhựa tối đa" }
-        }
-      },
-      "tray_4": {
-        "name": "Khay 4",
-        "state_attributes": {
-          "active": { "name": "Trạng thái hoạt động" },
-          "bed_temp": { "name": "Nhiệt độ bàn in" },
-          "color": { "name": "Màu sắc" },
-          "cols": { "name": "Các màu" },
-          "ctype": { "name": "Loại màu" },
-          "dry_temp": { "name": "Nhiệt độ sấy" },
-          "dry_time": { "name": "Thời gian sấy" },
-          "empty": { "name": "Rỗng" },
-          "k_value": { "name": "Giá trị K" },
-          "name": { "name": "Tên" },
-          "nozzle_temp_min": { "name": "Nhiệt độ đầu phun tối thiểu" },
-          "nozzle_temp_max": { "name": "Nhiệt độ đầu phun tối đa" },
-          "remain": { "name": "Sợi nhựa còn lại" },
-          "remain_enabled": { "name": "Bật ước tính sợi nhựa còn lại" },
-          "tag_uid": { "name": "Số serial cuộn" },
-          "type": { "name": "Loại" },
-          "filament_id": { "name": "ID sợi nhựa" },
-          "tray_weight": { "name": "Khối lượng sợi nhựa tối đa" }
+          "slot": {
+            "name": "Khe cắm"
+          },
+          "active": {
+            "name": "Trạng thái hoạt động"
+          },
+          "bed_temp": {
+            "name": "Nhiệt độ bàn in"
+          },
+          "color": {
+            "name": "Màu sắc"
+          },
+          "cols": {
+            "name": "Các màu"
+          },
+          "ctype": {
+            "name": "Loại màu"
+          },
+          "dry_temp": {
+            "name": "Nhiệt độ sấy"
+          },
+          "dry_time": {
+            "name": "Thời gian sấy"
+          },
+          "empty": {
+            "name": "Rỗng"
+          },
+          "k_value": {
+            "name": "Giá trị K"
+          },
+          "name": {
+            "name": "Tên"
+          },
+          "nozzle_temp_min": {
+            "name": "Nhiệt độ đầu phun tối thiểu"
+          },
+          "nozzle_temp_max": {
+            "name": "Nhiệt độ đầu phun tối đa"
+          },
+          "remain": {
+            "name": "Sợi nhựa còn lại"
+          },
+          "remain_enabled": {
+            "name": "Bật ước tính sợi nhựa còn lại"
+          },
+          "tag_uid": {
+            "name": "Số serial cuộn"
+          },
+          "tray_uuid": {
+            "name": "UUID khay"
+          },
+          "type": {
+            "name": "Loại"
+          },
+          "filament_id": {
+            "name": "ID sợi nhựa"
+          },
+          "tray_weight": {
+            "name": "Khối lượng sợi nhựa tối đa"
+          }
         }
       },
       "hotend_rack_holder_position": {
