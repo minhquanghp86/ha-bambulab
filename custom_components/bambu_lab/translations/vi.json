@@ -207,40 +207,88 @@
   "entity": {
     "binary_sensor": {
       "active_ams": {
-        "name": "Trạng thái hoạt động"
+        "name": "AMS hoạt động",
+        "state": {
+          "on": "Đang hoạt động",
+          "off": "Không hoạt động"
+        }
       },
       "drying": {
-        "name": "Đang sấy"
+        "name": "Sấy sợi nhựa",
+        "state": {
+          "on": "Đang sấy",
+          "off": "Không sấy"
+        }
       },
       "developer_lan_mode": {
-        "name": "Chế độ LAN dành cho nhà phát triển"
+        "name": "Chế độ LAN dành cho nhà phát triển",
+        "state": {
+          "on": "Đã bật",
+          "off": "Đã tắt"
+        }
       },
       "door_open": {
-        "name": "Cửa"
+        "name": "Cửa máy in",
+        "state": {
+          "on": "Đang mở",
+          "off": "Đã đóng"
+        }
       },
       "timelapse": {
-        "name": "Timelapse"
+        "name": "Timelapse",
+        "state": {
+          "on": "Đã bật",
+          "off": "Đã tắt"
+        }
       },
       "hms_errors": {
-        "name": "Lỗi HMS"
+        "name": "Lỗi HMS",
+        "state": {
+          "on": "Có lỗi",
+          "off": "Không có lỗi"
+        }
       },
       "print_error": {
-        "name": "Lỗi in"
+        "name": "Lỗi in",
+        "state": {
+          "on": "Có lỗi",
+          "off": "Không có lỗi"
+        }
       },
       "online": {
-        "name": "Trực tuyến"
+        "name": "Kết nối máy in",
+        "state": {
+          "on": "Trực tuyến",
+          "off": "Ngoại tuyến"
+        }
       },
       "mqtt_encryption": {
-        "name": "Mã hóa MQTT"
+        "name": "Mã hóa MQTT",
+        "state": {
+          "on": "Đã bật",
+          "off": "Đã tắt"
+        }
       },
       "hybrid_mode_blocks_control": {
-        "name": "Chế độ Hybrid MQTT bị chặn điều khiển"
+        "name": "Chế độ Hybrid MQTT",
+        "state": {
+          "on": "Đang chặn điều khiển",
+          "off": "Điều khiển bình thường"
+        }
       },
       "firmware_update": {
-        "name": "Firmware"
+        "name": "Cập nhật firmware",
+        "state": {
+          "on": "Có bản cập nhật",
+          "off": "Đã cập nhật"
+        }
       },
       "extruder_filament_state": {
-        "name": "Trạng thái sợi nhựa đùn"
+        "name": "Sợi nhựa đùn",
+        "state": {
+          "on": "Có sợi nhựa",
+          "off": "Không có sợi nhựa"
+        }
       }
     },
     "button": {
